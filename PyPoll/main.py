@@ -48,3 +48,32 @@ for candidate in candidates:
 print("-------------------------")
 print(f"Winner: {winner}")
 print("-------------------------")
+
+# Calculate the total number of votes
+voteTotal = sum(candidate_votes.values())
+
+# Define the output folder path where you want to save the file
+TxtPath = "/Users/natekaspar/Desktop/python-challenge/PyPoll/Analysis"
+
+# M
+os.makedirs(TxtPath, exist_ok=True)
+
+# Specify the output file path within the folder
+output_file_path = os.path.join(TxtPath, "election_results.txt")
+
+# Text file
+with open(output_file_path, "w", newline='') as electionfile:
+    electionfile.write(
+        f"Election Results\n"
+        f"-------------------------\n"
+        f"Total Votes: {voteTotal}\n"
+        f"-------------------------\n")
+
+    for key, value in candidate_votes.items():
+        percentage = (value / voteTotal) * 100
+        electionfile.write(f"{key}: {percentage:.3f}% ({value})\n")
+
+    electionfile.write(
+        f"-------------------------\n"
+        f"Winner: {winner}\n"
+        f"-------------------------")
